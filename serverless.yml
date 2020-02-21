@@ -13,7 +13,7 @@ provider:
   name: aws
   runtime: nodejs10.x
   stage: prod
-  region: us-east-1
+  region: us-east-2
 
 
   # These environment variables are made available to our functions
@@ -48,5 +48,13 @@ functions:
       - http:
           path: notes
           method: post
+          cors: true
+          authorizer: aws_iam
+  get:
+    handler: get.main
+    events:
+      - http:
+          path: notes/{id}
+          method: get
           cors: true
           authorizer: aws_iam
